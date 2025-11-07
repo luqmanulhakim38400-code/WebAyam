@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayam Cukurukuk</title>
+  <style>
+    /* ========== Gaya Umum ========== */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      margin: 0;
+      background-color: #ffffff;
+      color: #111;
+    }
+
+    header {
+      background-color: #c40000;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* ========== Navigasi ========== */
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background-color: #c40000;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    nav a:hover, nav a:focus, nav a:active {
+      background-color: #900000;
+      color: #fff;
+    }
+
+    /* ========== Struktur Umum ========== */
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #c40000;
+      border-bottom: 3px solid #c40000;
+      display: inline-block;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    p, li {
+      color: #222;
+      line-height: 1.6;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    /* ========== Grid Anggota & Menu Terbaik ========== */
+    .anggota, .menu-terbaik {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .anggota img, .menu-terbaik img {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #c40000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .anggota img:hover, .menu-terbaik img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ========== Footer ========== */
+    footer {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    a {
+      color: #c40000;
+    }
+
+    a:hover {
+      color: #900000;
+    }
+
+    /* ========== Responsif ========== */
+    @media (max-width: 768px) {
+      header {
+        font-size: 1.4rem;
+      }
+
+      nav {
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        flex: 1 0 45%;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+
+      section {
+        padding: 25px 15px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      nav a {
+        padding: 14px 25px;
+        font-size: 1rem;
+      }
+      section {
+        padding: 60px 40px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header> AYAM CUKURUKUK</header>
+
+  <nav>
+    <a href="#anggota">Anggota</a>
+    <a href="#tentang">Tentang Kami</a>
+    <a href="#keunggulan">Keunggulan</a>
+    <a href="#menu">Menu</a>
+    <a href="#menu-terbaik">Menu Terbaik</a>
+    <a href="#alamat">Alamat</a>
+    <a href="#sosmed">Sosial Media</a>
+  </nav>
+
+  <section id="anggota">
+    <h2>Anggota</h2>
+    <div class="anggota">
+      <div>
+        <img src="H.jpg" alt="Hanggara Febri Yahusha">
+        <p><b>Hanggara Febri Yahusha</b></p>
+      </div>
+      <div>
+        <img src="R.jpg" alt="Raissa Dimitri">
+        <p><b>Raissa Dimitri</b></p>
+      </div>
+      <div>
+        <img src="N.jpg" alt="Luqmanul Hakim Sinaga">
+        <p><b>Luqmanul Hakim Sinaga</b></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tentang">
+    <h2>Tentang Kami</h2>
+    <p>Ayam Cukurukuk adalah perusahaan yang bergerak di bidang produksi dan penjualan ayam olahan. 
+    Kami berkomitmen untuk menyediakan produk ayam yang berkualitas tinggi dan lezat untuk memenuhi kebutuhan konsumen.</p>
+  </section>
+
+  <section id="keunggulan">
+    <h2>Keunggulan Kami</h2>
+    <ul>
+      <li>Harga yang kompetitif dan terjangkau</li>
+      <li>Tempat yang strategis dan mudah dijangkau</li>
+      <li>Pelayanan yang ramah dan profesional</li>
+      <li>Proses pengolahan yang higienis dan aman</li>
+    </ul>
+  </section>
+
+  <section id="menu">
+    <h2>Menu</h2>
+    <ul>
+      <li>Ayam Paha atas........10k</li>
+      <li>Ayam Paha bawah......9k</li>
+      <li>Dada Ayam................15k</li>
+      <li>Sayap Ayam................9k</li>
+      <li>Kentang Goreng..........6k</li>
+      <li>Nasi Putih................... 5k</li>
+      <li>Air Putih.......................2k</li>
+      <li>Air Putih Es..................3k</li>
+      <li>Kopi..............................3k</li>
+      <li>Es teh manis................6k</li>
+      <li>Teh manis hangat........5k</li>
+      <li>Es jeruk.........................6k</li>
+      <li>Jeruk hangat................5k</li>
+    </ul>
+  </section>
+
+  <section id="menu-terbaik">
+    <h2>Menu Terbaik</h2>
+    <div class="menu-terbaik">
+      <div>
+        <img src="A.jpg" alt="Nasi Putih">
+        <p><b>Nasi Putih</b></p>
+      </div>
+      <div>
+        <img src="D.jpg" alt="Kentang Goreng">
+        <p><b>Kentang Goreng</b></p>
+      </div>
+      <div>
+        <img src="K.jpg" alt="Ayam Dada">
+        <p><b>Ayam Dada</b></p>
+      </div>
+      <div>
+        <img src="P.jpg" alt="Ayam Paha">
+        <p><b>Ayam Paha</b></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="alamat">
+    <h2>Alamat</h2>
+    <p>Jl. Seribu, Kec. Bojongsari, Kota Depok<br>
+    Telepon: 0859-2452-7483<br>
+    Email: ayamcukurukuk@gmail.com</p>
+  </section>
+
+  <section id="sosmed">
+    <h2>Sosial Media</h2>
+    <p>Instagram: <a href="https://instagram.com/ayamcukurukuk.official" target="_blank">@ayamcukurukuk</a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 Ayam Cukurukuk | Ayam Pilihan Keluarga |</p>
+  </footer>
+
+</body>
+</html>
