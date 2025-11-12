@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayam Cukurukuk</title>
+  <style>
+    /* ========== Gaya Umum ========== */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      margin: 0;
+      background: red;
+      color: #111;
+    }
+
+    /* ========== Header ========== */
+    header {
+      background-color: rgba(196, 0, 0, 0.9);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 1rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    header img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      border: 2px solid white;
+      object-fit: cover;
+      background-color: white;
+    }
+
+    /* ========== Navigasi ========== */
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background-color: black;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    nav a:hover, nav a:focus, nav a:active {
+      background-color: #900000;
+      color: #fff;
+    }
+
+    /* Tombol menu hitam */
+    .menu-toggle {
+      display: none;
+      background-color: black;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .menu-toggle:hover {
+      background-color: #333;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* Responsif untuk tombol */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .nav-links a {
+        border-top: 1px solid rgba(255,255,255,0.3);
+      }
+    }
+
+    /* ========== Struktur Umum ========== */
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-top: 30px;
+    }
+
+    h2 {
+      color: #c40000;
+      border-bottom: 3px solid #c40000;
+      display: inline-block;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    p, li {
+      color: #222;
+      line-height: 1.6;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    /* ========== Grid Anggota & Menu Terbaik ========== */
+    .anggota, .menu-terbaik {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .anggota img, .menu-terbaik img {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #c40000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .anggota img:hover, .menu-terbaik img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ========== Tombol Pesan Sekarang ========== */
+    .pesan-sekarang {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .pesan-sekarang a {
+      display: inline-block;
+      background-color: #c40000;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .pesan-sekarang a:hover {
+      background-color: #a00000;
+      transform: scale(1.05);
+    }
+
+    /* ========== Foto & Video ========== */
+    .foto-menu-besar, .video-promosi {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .foto-menu-besar img {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 12px;
+      border: 3px solid #c40000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .foto-menu-besar img:hover {
+      transform: scale(1.05);
+    }
+
+    .video-promosi video {
+      width: 100%;
+      max-width: 720px;
+      border-radius: 12px;
+      border: 3px solid #c40000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    /* ========== Footer ========== */
+    footer {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+
+    footer p {
+      margin: 0;
+      color: white;
+    }
+
+    a {
+      color: red;
+    }
+
+    a:hover {
+      color: red;
+    }
+
+    /* ========== Responsif ========== */
+    @media (max-width: 768px) {
+      header {
+        font-size: 1.4rem;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      header img {
+        height: 45px;
+        width: 45px;
+      }
+
+      nav {
+        flex-direction: column;
+      }
+
+      section {
+        padding: 25px 15px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      nav a {
+        padding: 14px 25px;
+        font-size: 1rem;
+      }
+      section {
+        padding: 60px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.jpg" alt="Logo Ayam Cukurukuk">
+    AYAM CUKURUKUK
+  </header>
+
+  <!-- 🔽 Tambahan tombol hitam + nav -->
+  <nav>
+    <button class="menu-toggle">☰ Menu</button>
+    <div class="nav-links">
+      <a href="#anggota">Anggota</a>
+      <a href="#tentang">Tentang Kami</a>
+      <a href="#video">Video Promosi</a>
+      <a href="#keunggulan">Keunggulan</a>
+      <a href="#menu">Menu</a>
+      <a href="#menu-terbaik">Menu Terbaik</a>
+      <a href="#swot">SWOT</a>
+      <a href="#k3lh">K3LH</a>
+      <a href="#sop">S.O.P</a> <!-- ✅ Tambahan baru -->
+      <a href="#alamat">Alamat</a>
+      <a href="#sosmed">Media sosial & Email</a>
+    </div>
+  </nav>
+
+  <script>
+    const toggleButton = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    toggleButton.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  </script>
+
+  <!-- Bagian lain tetap sama -->
+  <section id="anggota">
+    <h2>Anggota</h2>
+    <div class="anggota">
+      <div><img src="H.jpg" alt="Hanggara"><p><b>Hanggara Febra Yahusha</b></p></div>
+      <div><img src="R.jpg" alt="Raissa"><p><b>Raissa Dimitri</b></p></div>
+      <div><img src="N.jpg" alt="Luqmanul"><p><b>Luqmanul Hakim Sinaga</b></p></div>
+    </div>
+
+    <!-- ✅ Tambahan tombol pesan sekarang -->
+    <div class="pesan-sekarang">
+      <a href="https://luqmanulhakim38400-code.github.io/WebAyam/Web.html" target="_blank">🐔 Pesan Sekarang</a>
+    </div>
+  </section>
+
+  <!-- lanjut semua kode kamu tanpa perubahan -->
+  <section id="tentang">
+    <h2>Tentang PT Kami</h2>
+        <p>Kami adalah Ayam Cukurukuk, sebuah restoran yang menyajikan hidangan ayam goreng yang lezat dan autentik. Kami menggunakan bahan-bahan segar dan resep tradisional untuk menciptakan rasa yang unik dan menggugah selera.
+    <br>Kami berfokus pada kualitas dan kebersihan, sehingga Anda dapat menikmati makanan kami dengan percaya diri. Kami juga memiliki suasana yang nyaman dan ramah, sehingga Anda dapat bersantai dan menikmati waktu bersama keluarga dan teman-teman.</p>
+  </section>
+
+  <section id="video">
+    <h2>Video Promosi</h2>
+    <div class="video-promosi">
+      <video controls autoplay loop muted>
+        <source src="V.mp4" type="video/mp4">
+        Browser kamu tidak mendukung pemutar video.
+      </video>
+      <p><b>Tonton Video Promosi Ayam Cukurukuk!</b></p>
+    </div>
+  </section>
+
+  <section id="keunggulan">
+    <h2>Keunggulan Kami</h2>
+        <h3>Rasa Yang Autentik</h3>
+    <p>Ayam Cukurukuk menggunakan resep tradisional dan bumbu-bumbu khusus untuk menciptakan rasa yang unik dan lezat.</p>
+    <h3>Kualitas Bahan</h3>
+    <p>Kami menggunakan bahan-bahan segar dan berkualitas tinggi untuk memastikan bahwa hidangan kami selalu lezat dan sehat.</p>
+    <h3>Harga Yang Terjangkau</h3>
+    <p>Kami menawarkan harga yang terjangkau dengan kualitas yang tidak kalah dengan restoran lainnya.</p>
+    <h3>Suasana Yang Nyaman</h3>
+    <p>Kami memiliki suasana yang nyaman dan ramah, sehingga Anda dapat bersantai dan menikmati waktu bersama keluarga dan teman-teman.</p>
+    <h3>Pelayanan Yang Ramah</h3>
+    <p>Kami memiliki tim pelayanan yang ramah dan profesional untuk memastikan bahwa Anda memiliki pengalaman yang baik di Ayam Cukurukuk.</p>
+    <h3>Menu Yang Variatif</h3>
+    <p>Kami memiliki menu yang variatif, termasuk dada ayam, paha ayam, dan hidangan lainnya, sehingga Anda dapat memilih sesuai selera Anda.</p>
+  </section>
+
+  <section id="menu">
+    <h2>Menu</h2>
+    <div class="foto-menu-besar">
+      <img src="O.jpg" alt="Menu Utama Ayam Cukurukuk">
+    </div>
+  </section>
+
+  <section id="menu-terbaik">
+    <h2>Menu Terbaik</h2>
+    <div class="menu-terbaik">
+      <div><img src="A.jpg" alt="Sayap"><p><b>Sayap Ayam</b></p></div>
+      <div><img src="D.jpg" alt="Kentang"><p><b>Kentang Goreng</b></p></div>
+      <div><img src="K.jpg" alt="Dada"><p><b>Dada Ayam</b></p></div>
+      <div><img src="P.jpg" alt="Paha"><p><b>Paha Ayam</b></p></div>
+    </div>
+  </section>
+
+  <section id="swot">
+    <h2>Analisis SWOT</h2>
+    <div class="foto-menu-besar">
+      <img src="S.png" alt="Analisis SWOT Ayam Cukurukuk">
+    </div>
+  </section>
+
+  <section id="k3lh">
+    <h2>K3LH</h2>
+    <div class="foto-menu-besar">
+      <img src="3.jpg" alt="K3LH Ayam Cukurukuk">
+    </div>
+  </section>
+
+  <section id="sop">
+    <h2>S.O.P (Standard Operating Procedure)</h2>
+    <div class="foto-menu-besar">
+      <img src="Sop.jpg" alt="SOP Ayam Cukurukuk"></div>
+  </section>
+
+  <section id="alamat">
+    <h2>Alamat</h2>
+    <p>Jl. Seribu, Kec. Bojongsari, Kota Depok</p>
+    <h2>Waktu Buka</h2>
+    <p>Senin–Minggu | 08:00–20:00</p>
+  </section>
+
+  <section id="sosmed">
+    <h2>Media Sosial & Email</h2>
+    <p>Instagram: <a href="https://instagram.com/ayamcukurukuk.official">@ayamcukurukuk.official</a></p>
+    <p>WhatsApp: <a href="https://wa.me/6285924527083">WhatsApp Chef</a></p>
+    <p>Tiktok: <a href="https://tiktok.com/@pt.ayam.cukurukuk">PT.ayam cukurukuk</a></p>
+    <p>Email: <a href="mailto:ayamcukuruk72@gmail.com">ayamcukuruk72@gmail.com</a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 Ayam Cukurukuk | Ayam Pilihan Keluarga |</p>
+  </footer>
+
+</body>
+</html>
