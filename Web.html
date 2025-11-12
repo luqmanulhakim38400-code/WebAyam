@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Ayam Cukurukuk</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #ece5dd;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 100%;
+      max-width: 420px;
+      height: 90vh;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    /* Header WhatsApp style */
+    .chat-header {
+      background-color: #075e54;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .chat-header img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid white;
+      transition: 0.3s;
+    }
+
+    .chat-header img:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+
+    .chat-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-info .name {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .chat-info .status {
+      font-size: 12px;
+      color: #cfdad1;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background-color: #efeae2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bot, .user {
+      margin: 10px 0;
+      display: flex;
+    }
+
+    .bot { justify-content: flex-start; }
+    .user { justify-content: flex-end; }
+
+    .message {
+      max-width: 75%;
+      padding: 10px;
+      border-radius: 10px;
+      word-wrap: break-word;
+      font-size: 15px;
+    }
+
+    .bot .message {
+      background-color: #fff;
+      border-radius: 10px 10px 10px 0;
+    }
+
+    .user .message {
+      background-color: #dcf8c6;
+      border-radius: 10px 10px 0 10px;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 20px;
+      background-color: #25d366;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #1ebd5a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-container">
+    <div class="chat-header" onclick="resetChat()">
+      <img src="Logo.jpg" alt="Profil Ayam">
+      <div class="chat-info">
+        <div class="name">Ayam Cukurukuk 🐔</div>
+        <div class="status">online</div>
+      </div>
+    </div>
+
+    <div class="chat-box" id="chat-box">
+      <div class="bot"><div class="message">👋Halo, selamat datang di Ayam Cukurukuk 🐔</div></div>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    let cart = [];
+    let currentCategory = "";
+    let currentItem = "";
+    let currentPrice = 0;
+
+    function addBotMessage(text) {
+      const msg = document.createElement("div");
+      msg.classList.add("bot");
+      msg.innerHTML = `<div class="message">${text}</div>`;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function addUserMessage(text) {
+      const msg = document.createElement("div");
+      msg.classList.add("user");
+      msg.innerHTML = `<div class="message">${text}</div>`;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function showOptions(options) {
+      const container = document.createElement("div");
+      container.classList.add("options");
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt.label;
+        btn.onclick = () => handleUserChoice(opt);
+        container.appendChild(btn);
+      });
+      chatBox.appendChild(container);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function handleUserChoice(opt) {
+      addUserMessage(opt.label);
+      document.querySelectorAll(".options").forEach(o => o.remove());
+      opt.action();
+    }
+
+    function startChat() {
+      showOptions([
+        { label: "Menu Makanan", action: menuMakanan },
+        { label: "Menu Minuman", action: menuMinuman },
+        { label: "Paket Promo", action: paketPromo }
+      ]);
+    }
+
+    function menuMakanan() {
+      currentCategory = "makanan";
+      addBotMessage("🍗 Mau pilih menu apa hari ini?");
+      showOptions([
+        { label: "Paha Ayam 10rb", action: () => pilihItem("Paha Ayam", 10000) },
+        { label: "Dada Ayam 15rb", action: () => pilihItem("Dada Ayam", 15000) },
+        { label: "Sayap Ayam 9rb", action: () => pilihItem("Sayap Ayam", 9000) },
+        { label: "Kentang Goreng 6rb", action: () => pilihItem("Kentang Goreng", 6000) },
+        { label: "Nasi Putih 5rb", action: () => pilihItem("Nasi Putih", 5000) }
+      ]);
+    }
+
+    function menuMinuman() {
+      currentCategory = "minuman";
+      addBotMessage("🥤 Mau minum apa hari ini?");
+      showOptions([
+        { label: "Air Putih 2rb", action: () => pilihItem("Air Putih", 2000) },
+        { label: "Air Putih Es 3rb", action: () => pilihItem("Air Putih Es", 3000) },
+        { label: "Kopi 3rb", action: () => pilihItem("Kopi", 3000) },
+        { label: "Es Teh Manis 6rb", action: () => pilihItem("Es Teh Manis", 6000) },
+        { label: "Teh Manis Panas 5rb", action: () => pilihItem("Teh Manis Panas", 5000) },
+        { label: "Es Jeruk 6rb", action: () => pilihItem("Es Jeruk", 6000) },
+        { label: "Jeruk Panas 5rb", action: () => pilihItem("Jeruk Panas", 5000) }
+      ]);
+    }
+
+    function paketPromo() {
+      currentCategory = "paket";
+      addBotMessage("🎁 Mau pilih paket promo apa hari ini?");
+      showOptions([
+        { label: "Nasi + Paha 13rb", action: () => pilihItem("Paket Nasi + Paha", 13000) },
+        { label: "Nasi + Dada + Es Teh 20rb", action: () => pilihItem("Paket Nasi + Dada + Es Teh", 20000) },
+        { label: "Nasi + Paha + Kentang 18rb", action: () => pilihItem("Paket Nasi + Paha + Kentang", 18000) },
+        { label: "Nasi + Paha + Air 15rb", action: () => pilihItem("Paket Nasi + Paha + Air", 15000) }
+      ]);
+    }
+
+    function pilihItem(nama, harga) {
+      currentItem = nama;
+      currentPrice = harga;
+
+      if (currentCategory === "minuman") {
+        addBotMessage(`Berapa gelas ${nama}?`);
+      } else if (currentCategory === "paket") {
+        addBotMessage(`Mau berapa paket ${nama}?`);
+      } else {
+        addBotMessage(`Berapa porsi ${nama}?`);
+      }
+
+      showOptions([
+        { label: "1", action: () => hitungTotal(1) },
+        { label: "2", action: () => hitungTotal(2) },
+        { label: "3", action: () => hitungTotal(3) },
+        { label: "4", action: () => hitungTotal(4) },
+        { label: "5", action: () => hitungTotal(5) }
+      ]);
+    }
+
+    function hitungTotal(jumlah) {
+      const total = currentPrice * jumlah;
+      cart.push({ item: currentItem, qty: jumlah, total: total });
+      addBotMessage(`Total Rp${total.toLocaleString()}. Mau di antar atau ambil di tempat?`);
+      showOptions([
+        { label: "Antar", action: selesai },
+        { label: "Ambil sendiri", action: selesai },
+        { label: "Pesan lagi", action: pesanLagi }
+      ]);
+    }
+
+    function pesanLagi() {
+      addBotMessage("Oke, mau pilih menu apa lagi?");
+      startChat();
+    }
+
+    function selesai() {
+      let totalAll = 0;
+      let daftar = "✅ Pesanan kamu:<br>";
+      cart.forEach(c => {
+        daftar += `- ${c.qty}x ${c.item} = Rp${c.total.toLocaleString()}<br>`;
+        totalAll += c.total;
+      });
+      daftar += `<b>Total semua: Rp${totalAll.toLocaleString()}</b>`;
+      addBotMessage(daftar);
+      addBotMessage("Terima kasih sudah pesan di Ayam Cukurukuk! 🐔");
+    }
+
+    function resetChat() {
+      chatBox.innerHTML = `<div class="bot"><div class="message">👋Halo, selamat datang di Ayam Cukurukuk 🐔</div></div>`;
+      cart = [];
+      startChat();
+    }
+
+    startChat();
+  </script>
+
+</body>
+</html>
